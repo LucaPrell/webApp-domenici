@@ -1,0 +1,33 @@
+Spiegazione di WEB SERVICES:
+https://www.addlance.com/blog/web-service/
+https://italiancoders.it/introduzione-a-rest/
+https://www.html.it/guide/restful-web-services-la-guida/
+
+Datasource classname da inserire su JDBC CONNECTION POOLS di PAYARA:
+com.mysql.cj.jdbc.MysqlDataSource
+https://stackoverflow.com/questions/27785324/classnotfoundexception-com-mysql-jdbc-jdbc2-optional-mysqldatasource
+
+Libreria PURE CSS:
+https://purecss.io/
+
+Validatore JSON:
+https://jsonformatter.curiousconcept.com/
+
+Tutorial JSON su W3Schools;
+https://www.w3schools.com/js/js_json_intro.asp
+
+Free WebServices
+http://free-web-services.com/
+
+© 2019 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About

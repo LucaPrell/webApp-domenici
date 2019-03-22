@@ -1,0 +1,21 @@
+
+/* 
+    Created on : 18-mar-2019, 14.14.11
+    Author     : tss
+*/
+
+table.tabella{
+    border-collapse: collapse;
+    border:solid 1px gray;
+        
+}
+
+table.tabella td, table.tabella.th{
+    border:solid 1px gray;
+}
+
+table.tabella td{
+    background-color: red;
+    border: solid 1px gray;
+    
+}
