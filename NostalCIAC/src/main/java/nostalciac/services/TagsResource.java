@@ -14,6 +14,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import nostalciac.business.TagStore;
 import nostalciac.entity.Tag;
@@ -23,7 +24,7 @@ import nostalciac.entity.Tag;
  * @author tss
  */
 @Path("tags")
-public class TagResources {
+public class TagsResource {
 
     @Inject
     TagStore store;
@@ -31,6 +32,15 @@ public class TagResources {
     @GET
     public List<Tag> findAll() {
         return store.all();
+    }
+    
+    // ricerca per TAG e TIPO
+    @GET
+    @Path("search")
+    public List<Tag> search(
+            @QueryParam("tag") String searchTag,
+            @QueryParam("tipo") String searchTipo) {
+        return store.search(searchTag,searchTipo);
     }
     
     @GET
@@ -50,7 +60,10 @@ public class TagResources {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("{id}")
     public void update(@PathParam("id") int id,Tag tag){
-        store.create(tag);
+        // se id esiste nel DB faccio un aggiornamento
+        // altrimenti lo creo nuovo
+        tag.setId(id);
+        store.save(tag);
     }
     
     @DELETE

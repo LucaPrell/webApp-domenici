@@ -5,7 +5,6 @@
  */
 package nostalciac.business;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -14,45 +13,44 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import nostalciac.entity.Tag;
+import nostalciac.entity.Sede;
 
 /**
  *
  * @author tss
  */
+// Indicazione che si tratta di un EJB
 @Stateless
-public class TagStore {
-
-    // Se abbiamo più di un DB dobbiamo indicarglielo,
-    @PersistenceContext()
+public class SedeStore {
+    @PersistenceContext
     EntityManager em;
-
+    
     /**
      * *
      * Restituisce tutti i tag
      *
      * @return
      */
-    public List<Tag> all() {
+    public List<Sede> all() {
         // Dammi tutti 
-        return em.createQuery("select e FROM Tag e ORDER BY e.tag ", Tag.class)
+        return em.createQuery("select e FROM Sede e ORDER BY e.nome ", Sede.class)
                 .getResultList();
     }
 
     // per salvare nuovo record su DB
-    public Tag create(Tag tag) {
-        return em.merge(tag);
+    public Sede create(Sede sede) {
+        return em.merge(sede);
     }
 
     /**
      * *
      * Insert o Update su DB
      *
-     * @param tag
+     * @param sede
      * @return
      */
-    public Tag save(Tag tag) {
-        return em.merge(tag);
+    public Sede save(Sede sede) {
+        return em.merge(sede);
     }
 
     /**
@@ -61,8 +59,8 @@ public class TagStore {
      * @param id
      * @return
      */
-    public Tag find(int id) {
-        return em.find(Tag.class, id);
+    public Sede find(int id) {
+        return em.find(Sede.class, id);
     }
 
     /**
@@ -72,33 +70,33 @@ public class TagStore {
      */
     public void remove(int id) {
         // prima si cerca per ID e poi si cancella
-        Tag toremove = em.find(Tag.class, id);
+        Sede toremove = em.find(Sede.class, id);
         em.remove(toremove);
     }
-
+    
     /**
      * Restituisce i tag trovati in base alla ricerca
      *
-     * @param searchTag
-     * @param searchTipo
+     * @param searchSede
+     * @param searchCitta
      * @return
      */
-    public List<Tag> search(String searchTag, String searchTipo) {
+    public List<Sede> search(String searchSede, String searchCitta) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         // creare query
-        CriteriaQuery<Tag> query = cb.createQuery(Tag.class);
-        Root<Tag> root = query.from(Tag.class);
+        CriteriaQuery<Sede> query = cb.createQuery(Sede.class);
+        Root<Sede> root = query.from(Sede.class);
 
         Predicate condition = cb.conjunction();
 
-        if (searchTag != null && !searchTag.isEmpty()) {
+        if (searchSede != null && !searchSede.isEmpty()) {
             condition = cb.and(condition,
-                    cb.like(root.get("tag"), "%" + searchTag + "%"));
+                    cb.like(root.get("nome"), "%" + searchSede + "%"));
         }
 
-        if (searchTipo != null && !searchTipo.isEmpty()) {
+        if (searchCitta != null && !searchCitta.isEmpty()) {
             condition = cb.and(condition,
-                    cb.like(root.get("tipo"), "%" + searchTipo + "%"));
+                    cb.like(root.get("citta"), "%" + searchCitta + "%"));
         }
 
         query.select(root)
