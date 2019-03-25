@@ -4,20 +4,20 @@
  * and open the template in the editor.
  */
 
-var jsonTags;
+var jsonSedi;
 
-function caricaTag() {
+function caricaSedi() {
     
     
-    fetch('http://localhost:8080/nostalciac/resources/tags')
+    fetch('http://localhost:8080/nostalciac/resources/sedi')
             .then(response => {
                 console.log("response...", response);
                 return response.json();
             })
             .then(json => {
                 document.querySelector("#contenitore").innerHTML = "";
-                creaTabellaDaJson(json, "id,tag,tipo", "tab1", "tabella", "#contenitore");
-                jsonTags = json;
+                creaTabellaDaJson(json, "id,nome,indirizzo,tel,citta,mail,note", "tab1", "pure-table", "#contenitore");
+                jsonSedi = json;
             })
             .then(e => caricaSelect())
             .catch(x => {
@@ -27,27 +27,25 @@ function caricaTag() {
 
 }
 
-caricaTag();
+caricaSedi();
 
 function caricaSelect() {
-    //
-    document.querySelector("#sel_tags").innerHTML = ""
+    // cancella contenuto della select
+    document.querySelector("#sel_sedi").innerHTML = "";
     
     let opt = document.createElement("option");
     opt.innerHTML = "Scegli il record da modificare";
     opt.value = -1;
-    document.querySelector("#sel_tags").append(opt);
+    document.querySelector("#sel_sedi").append(opt);
 
-    jsonTags.forEach((tag, j) => {
+    jsonSedi.forEach((sedi, j) => {
         let opt = document.createElement("option");
-        opt.innerHTML = tag.id + " --> " + tag.tag + " - " + tag.tipo;
+        opt.innerHTML = sedi.id + " --> " + sedi.nome ;
         opt.value = j;
-        opt.setAttribute("tag", tag.tag);
-        opt.setAttribute("tipo", tag.tipo);
-        opt.setAttribute("idTag", tag.id); //meglio che id
-        document.querySelector("#sel_tags").append(opt);
+        opt.setAttribute("idSedi", sedi.id); //meglio che id
+        document.querySelector("#sel_sedi").append(opt);
 
-    })
+    });
 
 
 }
@@ -57,25 +55,33 @@ function caricaSelect() {
 //window.onload = function () {
 
 
-document.querySelector("#sel_tags").onchange = function (e) {
+document.querySelector("#sel_sedi").onchange = function (e) {
 
-    let indiceOpzione = document.querySelector("#sel_tags").selectedIndex
-    let opzioneSelezionata = document.querySelector("#sel_tags").options[indiceOpzione]
+    let indiceOpzione = document.querySelector("#sel_sedi").selectedIndex;
+    let opzioneSelezionata = document.querySelector("#sel_sedi").options[indiceOpzione];
 
     let value = opzioneSelezionata.value;
-    let idTag = jsonTags[value].id;
-    let tipo = jsonTags[value].tipo;
-    let tag = jsonTags[value].tag;
+    let idSede = jsonSedi[value].id;
+    let nome = jsonSedi[value].nome;
+    let indirizzo = jsonSedi[value].indirizzo;
+    let tel = jsonSedi[value].tel;
+    let citta = jsonSedi[value].citta;
+    let mail = jsonSedi[value].mail;
+    let note = jsonSedi[value].note;
 
     //alternativa      
     //let idTag = opzioneSelezionata.getAttribute("idTag")
     //let tipo = opzioneSelezionata.getAttribute("tipo")
     //let tag = opzioneSelezionata.getAttribute("tag")
 
-    document.querySelector("#tag").value = tag;
-    document.querySelector("#tipo").value = tipo;
-    console.log(idTag, tipo, tag);
-}
+    document.querySelector("#nome").value = nome;
+    document.querySelector("#indirizzo").value = indirizzo;
+    document.querySelector("#tel").value = tel;
+    document.querySelector("#citta").value = citta;
+    document.querySelector("#mail").value = mail;
+    document.querySelector("#note").value = note;
+    console.log(idSede, nome, indirizzo,tel,citta,mail,note);
+};
 
 //}
 
@@ -111,7 +117,7 @@ document.querySelector("#b_modTag").onclick = function () {
         console.log("response:", response)
         console.log("response.text():", response.text())
         
-        caricaTag()
+        caricaSedi()
         caricaSelect()
         return;
     }).catch(res => console.error("ERRORE:", res))

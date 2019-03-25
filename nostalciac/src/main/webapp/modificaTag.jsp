@@ -16,6 +16,7 @@
     <body>
         <h1>Modifica TAGS</h1>
         <div id="contenitore"></div>
+        <br><br>
         <form>
 
             <select id="sel_tags">
@@ -26,7 +27,7 @@
             <input type="text" id="tipo">
             <label for="tag">Tag: </label>
             <input type="text" id="tag">
-            <input type="submit" id="b_modTag" value="Conferma modifica">
+            <input type="button" id="b_modTag" value="Conferma modifica">
 
             <br>
 

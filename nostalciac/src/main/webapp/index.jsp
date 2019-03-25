@@ -13,6 +13,8 @@
     </head>
     <body>
         <a href="./modificaTag.jsp">Modifica TAG</a>
+        <br/>
+        <a href="./modificaSede.jsp">Modifica Sedi</a>
         <div></div>
         <!--<script src="jsNostalciac.js" type="text/javascript"></script>-->
         
