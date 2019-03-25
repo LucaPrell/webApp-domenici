@@ -13,7 +13,7 @@ function onSearch(e) {
     document.getElementById("querySearch").innerHTML="";
     e.preventDefault();
 //    console.log("search...", elSearch.value);
-    fetch('http://localhost:8080/lez16_webApp/api/employees/search?officeCode=' + elSearch.value)
+    fetch('http://localhost:8080/lez16_Employess/api/employees/search?officeCode=' + elSearch.value)
             .then(response => response.json())
 //            .then(json => console.log(json))
             .then(json => creaTabellaDaJson(json,"idEmp,lastName,firstName,idOffice", "tabAnagrafica","pure-table","div"));

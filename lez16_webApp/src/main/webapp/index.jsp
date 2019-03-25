@@ -1,6 +1,7 @@
+
 <%-- 
-    Document   : index
-    Created on : 15-mar-2019, 15.49.47
+    Document   : Index
+    Created on : 25-mar-2019, 9.12.29
     Author     : tss
 --%>
 
@@ -9,22 +10,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="cssNostalciac.css" rel="stylesheet" type="text/css"/>
         <title>JSP Page</title>
     </head>
     <body>
-        <header>
-            <nav>
-                <a href="customerSearch.jsp">Ricerca con JSP</a>
-                <a href="customerSearchAJAX.html">Ricerca AJAX (Javascript e REST service)</a>
-                
-            </nav>
-        </header>
-        <main>
-
-        </main>
-
-        <footer>
-
-        </footer>
+        <h1>Hello World!</h1>
+        <input type="button" id="callDB" value="collegati DB">
+        <input id="in_findID" type="text" placeholder="inserisci l'id">
+        <input type="button" id="findID" value="cerca ID">
+        <input type="button" id="b_post" value="inserisci TAG">
+        <div id="contenitore"></div>
+        <script src="jsNostalciac.js" type="text/javascript"></script>
     </body>
 </html>
